@@ -494,7 +494,12 @@
       const hasNotHas = getVal('hasNotHas');
       courtText += `${clientName || 'Client'} ${hasNotHas} kept all appointments as scheduled.\n`;
 
-      courtText += `Checking in with case manager per requirements: ${getVal('checkingIn')}\n\n`;
+      const checkingIn = getVal('checkingIn');
+      if (checkingIn === 'Yes') {
+        courtText += `Checking in with case manager per requirements: Yes\n\n`;
+      } else {
+        courtText += `NOT checking in with case manager per requirements.\n\n`;
+      }
 
       const lud = formatDate(getVal('lud'));
       if (lud) {
