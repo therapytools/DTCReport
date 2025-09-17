@@ -1,652 +1,659 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Treatment Court Reports</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Custom Styles */
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8fafc; /* slate-50 */
-    }
-    .form-container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    }
-    .form-section {
-      border: 1px solid #e2e8f0; /* slate-200 */
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .form-section-title {
-      font-size: 1.125rem; /* text-lg */
-      font-weight: 600;
-      color: #1e293b; /* slate-800 */
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid #e2e8f0; /* slate-200 */
-    }
-    .input-group {
-      margin-bottom: 1.25rem;
-    }
-    .input-group:last-child {
-        margin-bottom: 0;
-    }
-    .input-group label {
-      display: block;
-      font-weight: 500;
-      color: #475569; /* slate-600 */
-      margin-bottom: 0.5rem;
-    }
-    .input-field, .select-field, .textarea-field {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #cbd5e1; /* slate-300 */
-      border-radius: 6px;
-      font-size: 1rem;
-      color: #334155; /* slate-700 */
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .input-field:focus, .select-field:focus, .textarea-field:focus {
-      outline: none;
-      border-color: #4f46e5; /* indigo-600 */
-      box-shadow: 0 0 0 2px #c7d2fe; /* indigo-200 */
-    }
-    .textarea-field {
-        min-height: 120px;
-        resize: vertical;
-    }
-    .generated-text {
-        overflow-y: hidden; /* Hide scrollbar during resize */
-    }
-    .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.1s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .btn:active {
-        transform: translateY(1px);
-    }
-    .btn-primary {
-      background-color: #4f46e5; /* indigo-600 */
-      color: white;
-      border: 1px solid transparent;
-    }
-    .btn-primary:hover {
-      background-color: #4338ca; /* indigo-700 */
-    }
-    .btn-secondary {
-        background-color: #e2e8f0; /* slate-200 */
-        color: #475569; /* slate-600 */
-        border: 1px solid #e2e8f0;
-    }
-    .btn-secondary:hover {
-        background-color: #cbd5e1; /* slate-300 */
-    }
-    .dynamic-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr auto;
-        gap: 1rem;
-        align-items: center;
-        background-color: #f8fafc; /* slate-50 */
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-    }
-    .hidden {
-      display: none;
-    }
-    .checkbox-label {
-        font-weight: 500;
-        color: #475569;
-        margin-left: 0.5rem;
-    }
-    .generated-note-container {
-        margin-top: 2rem;
-    }
-    .generated-note-container h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 1rem;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treatment Court Reports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom Styles */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc; /* slate-50 */
+    }
+    .form-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    .form-section {
+      border: 1px solid #e2e8f0; /* slate-200 */
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .form-section-title {
+      font-size: 1.125rem; /* text-lg */
+      font-weight: 600;
+      color: #1e293b; /* slate-800 */
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2e8f0; /* slate-200 */
+    }
+    .input-group {
+      margin-bottom: 1.25rem;
+    }
+    .input-group:last-child {
+        margin-bottom: 0;
+    }
+    .input-group label {
+      display: block;
+      font-weight: 500;
+      color: #475569; /* slate-600 */
+      margin-bottom: 0.5rem;
+    }
+    .input-field, .select-field, .textarea-field {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #cbd5e1; /* slate-300 */
+      border-radius: 6px;
+      font-size: 1rem;
+      color: #334155; /* slate-700 */
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .input-field:focus, .select-field:focus, .textarea-field:focus {
+      outline: none;
+      border-color: #4f46e5; /* indigo-600 */
+      box-shadow: 0 0 0 2px #c7d2fe; /* indigo-200 */
+    }
+    .textarea-field {
+        min-height: 120px;
+        resize: vertical;
+    }
+    .generated-text {
+        overflow-y: hidden; /* Hide scrollbar during resize */
+    }
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn:active {
+        transform: translateY(1px);
+    }
+    .btn-primary {
+      background-color: #4f46e5; /* indigo-600 */
+      color: white;
+      border: 1px solid transparent;
+    }
+    .btn-primary:hover {
+      background-color: #4338ca; /* indigo-700 */
+    }
+    .btn-secondary {
+        background-color: #e2e8f0; /* slate-200 */
+        color: #475569; /* slate-600 */
+        border: 1px solid #e2e8f0;
+    }
+    .btn-secondary:hover {
+        background-color: #cbd5e1; /* slate-300 */
+    }
+    .dynamic-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 1rem;
+        align-items: center;
+        background-color: #f8fafc; /* slate-50 */
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    .hidden {
+      display: none;
+    }
+    .checkbox-label {
+        font-weight: 500;
+        color: #475569;
+        margin-left: 0.5rem;
+    }
+    .generated-note-container {
+        margin-top: 2rem;
+    }
+    .generated-note-container h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
-  <div class="form-container">
-    <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-slate-800">Treatment Court Report Generator</h1>
-        <p class="text-slate-500 mt-2">Fill out the form below to automatically generate progress and court notes.</p>
-    </div>
-    <form id="progressNoteForm">
-            <div class="form-section">
-        <h2 class="form-section-title">General Information</h2>
-        <div class="grid md:grid-cols-2 gap-x-6">
-            <div class="input-group">
-              <label for="clientName">Client Name</label>
-              <input type="text" id="clientName" class="input-field" onchange="generateNotes()">
-            </div>
-            <div class="input-group">
-              <label for="careCoordination">Care Coordination Sources</label>
-              <input type="text" id="careCoordination" class="input-field" placeholder="e.g., probation, parole, mental health" onchange="generateNotes()">
-            </div>
-            <div class="input-group">
-              <label for="initialCourtDate">Last Court Date</label>
-              <input type="date" id="initialCourtDate" class="input-field" onchange="handleLudVisibility(); generateNotes()">
-            </div>
-            <div class="input-group">
-                <label for="courtPrepDate">Next Court Date</label>
-                <input type="date" id="courtPrepDate" class="input-field" onchange="generateNotes()">
-            </div>
-        </div>
-      </div>
-            <div class="form-section">
-        <h2 class="form-section-title">Client Progress & Attendance</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="input-group">
-                <label for="checkingIn">Checking In with Case Manager</label>
-                <select id="checkingIn" class="select-field" onchange="generateNotes()">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="treatmentSchedule">Treatment Schedule</label>
-                <input type="text" id="treatmentSchedule" class="input-field" placeholder="e.g., # individuals/week, # groups/week" onchange="generateNotes()">
-            </div>
-        </div>
-        <div class="input-group">
-            <label>Overall Appointment Attendance</label>
-            <div class="flex items-center mt-2">
-                <select id="hasNotHas" class="select-field w-auto mr-2" onchange="generateNotes()">
-                  <option value="has">Has</option>
-                  <option value="has not">Has Not</option>
-                </select>
-                <span class="text-slate-600">kept all appointments as scheduled.</span>
-            </div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6 mt-6">
-            <div class="input-group">
-                <label>Individual Sessions</label>
-                <div class="flex items-center gap-2">
-                    <input type="number" id="individualAttended" class="input-field" placeholder="Attended" onchange="generateNotes()">
-                    <span class="text-slate-500 font-bold">/</span>
-                    <input type="number" id="individualTotal" class="input-field" placeholder="Total" onchange="generateNotes()">
-                </div>
-                <div id="individualMissedContainer" class="hidden mt-2">
-                  <input type="text" id="individualMissed" class="input-field" placeholder="Dates missed, excused status" onchange="generateNotes()">
-                </div>
-            </div>
-            <div class="input-group">
-                <label>Group Sessions</label>
-                <div class="flex items-center gap-2">
-                    <input type="number" id="groupAttended" class="input-field" placeholder="Attended" onchange="generateNotes()">
-                    <span class="text-slate-500 font-bold">/</span>
-                    <input type="number" id="groupTotal" class="input-field" placeholder="Total" onchange="generateNotes()">
-                </div>
-                <div id="groupMissedContainer" class="hidden mt-2">
-                  <input type="text" id="groupMissed" class="input-field" placeholder="Dates missed, excused status" onchange="generateNotes()">
-                </div>
-            </div>
-            <div class="input-group">
-                <label>Medication Appointments</label>
-                <div class="flex items-center gap-2">
-                    <input type="number" id="medAttended" class="input-field" placeholder="Attended" onchange="generateNotes()">
-                    <span class="text-slate-500 font-bold">/</span>
-                    <input type="number" id="medTotal" class="input-field" placeholder="Total" onchange="generateNotes()">
-                </div>
-                <div id="medMissedContainer" class="hidden mt-2">
-                  <input type="text" id="medMissed" class="input-field" placeholder="Dates missed, excused status" onchange="generateNotes()">
-                </div>
-            </div>
-        </div>
-         <div class="grid md:grid-cols-2 gap-6 mt-4">
-            <div class="input-group">
-                <label for="nextDate">Next Appointment Date</label>
-                <input type="date" id="nextDate" class="input-field" onchange="generateNotes()">
-            </div>
-            <div class="input-group">
-                <label for="appointmentType">Next Appointment Type</label>
-                <input type="text" id="appointmentType" class="input-field" placeholder="e.g., Individual Session" onchange="generateNotes()">
-            </div>
-        </div>
-      </div>
-            <div class="form-section">
-        <h2 class="form-section-title">Toxicology & Substance Use</h2>
-        <div class="input-group">
-            <label for="lud">Last Use Date (LUD)</label>
-            <input type="date" id="lud" class="input-field" onchange="handleLudVisibility(); generateNotes()">
-            <div id="ludExtra" class="hidden mt-4 p-4 bg-slate-50 rounded-md border border-slate-200">
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="input-group mb-0">
-                      <label for="ludResponse">Response</label>
-                      <select id="ludResponse" class="select-field" onchange="generateNotes()">
-                        <option value=""></option>
-                        <option value="reported promptly">Reported promptly</option>
-                        <option value="not reported promptly">Not reported promptly</option>
-                        <option value="denies use">Denies Use</option>
-                      </select>
-                    </div>
-                    <div class="input-group mb-0">
-                      <label for="ludSubstance">Substance(s)</label>
-                      <input type="text" id="ludSubstance" class="input-field" placeholder="e.g., Alcohol, Cannabis" onchange="generateNotes()">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="input-group">
-            <label>Toxicology Screens at Treatment</label>
-            <div class="flex items-center my-2">
-                <input type="checkbox" id="toxNotScreened" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" onchange="generateNotes()">
-                <label for="toxNotScreened" class="checkbox-label">N/A - not screened since last court date</label>
-            </div>
-            <div id="toxContainer">
-                          </div>
-            <button type="button" class="btn btn-secondary mt-2" onclick="addToxRow()">+ Add Screen</button>
-        </div>
-        <div class="input-group">
-            <label>Random Screens</label>
-            <div class="flex items-center my-2">
-                <input type="checkbox" id="randomNotScreened" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" onchange="generateNotes()">
-                <label for="randomNotScreened" class="checkbox-label">N/A - not screened since last court date</label>
-            </div>
-            <div id="randomContainer">
-                            </div>
-            <button type="button" class="btn btn-secondary mt-2" onclick="addRandomRow()">+ Add Screen</button>
-        </div>
-        <div class="input-group">
-            <label for="matAttendance">Medication-Assisted Treatment (MAT)</label>
-            <div class="flex items-center mt-2">
-                <span class="text-slate-600 mr-2">Client</span>
-                <select id="matAttendance" class="select-field w-auto" onchange="generateNotes()">
-                  <option value=""></option>
-                  <option value="is">is</option>
-                  <option value="is not">is not</option>
-                </select>
-                <span class="text-slate-600 ml-2">attending MAT appointments as scheduled.</span>
-            </div>
-        </div>
-      </div>
-             <div class="form-section">
-        <h2 class="form-section-title">Additional Notes</h2>
-         <div class="input-group">
-            <label for="probation">Probation Notes</label>
-            <textarea id="probation" class="textarea-field" onchange="generateNotes()"></textarea>
-          </div>
-          <div class="input-group">
-            <label for="mentalHealth">Mental Health Notes</label>
-            <textarea id="mentalHealth" class="textarea-field" onchange="generateNotes()"></textarea>
-          </div>
-          <div class="input-group">
-            <label for="additionalNotes">Additional Notes</label>
-            <textarea id="additionalNotes" class="textarea-field" onchange="generateNotes()"></textarea>
-          </div>
-      </div>
-    </form>
-        <div class="generated-note-container">
-      <h3>Progress Note</h3>
-      <textarea id="progressNote" class="textarea-field generated-text"></textarea>
-      <button class="btn btn-primary mt-2" onclick="copyText('progressNote')">Copy Progress Note</button>
-    </div>
-    <div class="generated-note-container">
-      <h3>Court Note</h3>
-      <textarea id="courtNote" class="textarea-field generated-text"></textarea>
-      <button class="btn btn-primary mt-2" onclick="copyText('courtNote')">Copy Court Note</button>
-    </div>
-  </div>
-  <script>
-    // --- UTILITY FUNCTIONS ---
-    function formatDate(dateString) {
-      if (!dateString) return '';
-      const date = new Date(dateString + 'T00:00:00'); // Avoid timezone issues
-      return new Intl.DateTimeFormat('en-US').format(date);
-    }
+  <div class="form-container">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-slate-800">Treatment Court Report Generator</h1>
+        <p class="text-slate-500 mt-2">Fill out the form below to automatically generate progress and court notes.</p>
+    </div>
+    <form id="progressNoteForm">
+      <!-- General Information Section -->
+      <div class="form-section">
+        <h2 class="form-section-title">General Information</h2>
+        <div class="grid md:grid-cols-2 gap-x-6">
+            <div class="input-group">
+              <label for="clientName">Client Name</label>
+              <input type="text" id="clientName" class="input-field" onchange="generateNotes()">
+            </div>
+            <div class="input-group">
+              <label for="careCoordination">Care Coordination Sources</label>
+              <input type="text" id="careCoordination" class="input-field" placeholder="e.g., probation, parole, mental health" onchange="generateNotes()">
+            </div>
+            <div class="input-group">
+              <label for="initialCourtDate">Last Court Date</label>
+              <input type="date" id="initialCourtDate" class="input-field" onchange="handleLudVisibility(); generateNotes()">
+            </div>
+            <div class="input-group">
+                <label for="courtPrepDate">Next Court Date</label>
+                <input type="date" id="courtPrepDate" class="input-field" onchange="generateNotes()">
+            </div>
+        </div>
+      </div>
+      <!-- Client Progress Section -->
+      <div class="form-section">
+        <h2 class="form-section-title">Client Progress & Attendance</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="input-group">
+                <label for="checkingIn">Checking In with Case Manager</label>
+                <select id="checkingIn" class="select-field" onchange="generateNotes()">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="treatmentSchedule">Treatment Schedule</label>
+                <input type="text" id="treatmentSchedule" class="input-field" placeholder="e.g., # individuals/week, # groups/week" onchange="generateNotes()">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Overall Appointment Attendance</label>
+            <div class="flex items-center mt-2">
+                <select id="hasNotHas" class="select-field w-auto mr-2" onchange="generateNotes()">
+                  <option value="has">Has</option>
+                  <option value="has not">Has Not</option>
+                </select>
+                <span class="text-slate-600">kept all appointments as scheduled.</span>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 mt-6">
+            <div class="input-group">
+                <label>Individual Sessions</label>
+                <div class="flex items-center gap-2">
+                    <input type="number" id="individualAttended" class="input-field" placeholder="Attended" onchange="generateNotes()">
+                    <span class="text-slate-500 font-bold">/</span>
+                    <input type="number" id="individualTotal" class="input-field" placeholder="Total" onchange="generateNotes()">
+                </div>
+                <div id="individualMissedContainer" class="hidden mt-2">
+                  <input type="text" id="individualMissed" class="input-field" placeholder="Dates missed, excused status" onchange="generateNotes()">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Group Sessions</label>
+                <div class="flex items-center gap-2">
+                    <input type="number" id="groupAttended" class="input-field" placeholder="Attended" onchange="generateNotes()">
+                    <span class="text-slate-500 font-bold">/</span>
+                    <input type="number" id="groupTotal" class="input-field" placeholder="Total" onchange="generateNotes()">
+                </div>
+                <div id="groupMissedContainer" class="hidden mt-2">
+                  <input type="text" id="groupMissed" class="input-field" placeholder="Dates missed, excused status" onchange="generateNotes()">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Medication Appointments</label>
+                <div class="flex items-center gap-2">
+                    <input type="number" id="medAttended" class="input-field" placeholder="Attended" onchange="generateNotes()">
+                    <span class="text-slate-500 font-bold">/</span>
+                    <input type="number" id="medTotal" class="input-field" placeholder="Total" onchange="generateNotes()">
+                </div>
+                <div id="medMissedContainer" class="hidden mt-2">
+                  <input type="text" id="medMissed" class="input-field" placeholder="Dates missed, excused status" onchange="generateNotes()">
+                </div>
+            </div>
+        </div>
+         <div class="grid md:grid-cols-2 gap-6 mt-4">
+            <div class="input-group">
+                <label for="nextDate">Next Appointment Date</label>
+                <input type="date" id="nextDate" class="input-field" onchange="generateNotes()">
+            </div>
+            <div class="input-group">
+                <label for="appointmentType">Next Appointment Type</label>
+                <input type="text" id="appointmentType" class="input-field" placeholder="e.g., Individual Session" onchange="generateNotes()">
+            </div>
+        </div>
+      </div>
+      <!-- Toxicology & Substance Use Section -->
+      <div class="form-section">
+        <h2 class="form-section-title">Toxicology & Substance Use</h2>
+        <div class="input-group">
+            <label for="lud">Last Use Date (LUD)</label>
+            <input type="date" id="lud" class="input-field" onchange="handleLudVisibility(); generateNotes()">
+            <div id="ludExtra" class="hidden mt-4 p-4 bg-slate-50 rounded-md border border-slate-200">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="input-group mb-0">
+                      <label for="ludResponse">Response</label>
+                      <select id="ludResponse" class="select-field" onchange="generateNotes()">
+                        <option value=""></option>
+                        <option value="reported promptly">Reported promptly</option>
+                        <option value="not reported promptly">Not reported promptly</option>
+                        <option value="denies use">Denies Use</option>
+                      </select>
+                    </div>
+                    <div class="input-group mb-0">
+                      <label for="ludSubstance">Substance(s)</label>
+                      <input type="text" id="ludSubstance" class="input-field" placeholder="e.g., Alcohol, Cannabis" onchange="generateNotes()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Toxicology Screens at Treatment</label>
+            <div class="flex items-center my-2">
+                <input type="checkbox" id="toxNotScreened" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" onchange="generateNotes()">
+                <label for="toxNotScreened" class="checkbox-label">N/A - not screened since last court date</label>
+            </div>
+            <div id="toxContainer">
+              <!-- Dynamic rows will be injected here -->
+            </div>
+            <button type="button" class="btn btn-secondary mt-2" onclick="addToxRow()">+ Add Screen</button>
+        </div>
+        <div class="input-group">
+            <label>Random Screens</label>
+            <div class="flex items-center my-2">
+                <input type="checkbox" id="randomNotScreened" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" onchange="generateNotes()">
+                <label for="randomNotScreened" class="checkbox-label">N/A - not screened since last court date</label>
+            </div>
+            <div id="randomContainer">
+                <!-- Dynamic rows will be injected here -->
+            </div>
+            <button type="button" class="btn btn-secondary mt-2" onclick="addRandomRow()">+ Add Screen</button>
+        </div>
+        <div class="input-group">
+            <label for="matAttendance">Medication-Assisted Treatment (MAT)</label>
+            <div class="flex items-center mt-2">
+                <span class="text-slate-600 mr-2">Client</span>
+                <select id="matAttendance" class="select-field w-auto" onchange="generateNotes()">
+                  <option value=""></option>
+                  <option value="is">is</option>
+                  <option value="is not">is not</option>
+                </select>
+                <span class="text-slate-600 ml-2">attending MAT appointments as scheduled.</span>
+            </div>
+        </div>
+      </div>
+      <!-- Additional Notes Section -->
+       <div class="form-section">
+        <h2 class="form-section-title">Additional Notes</h2>
+         <div class="input-group">
+            <label for="probation">Probation Notes</label>
+            <textarea id="probation" class="textarea-field" onchange="generateNotes()"></textarea>
+          </div>
+          <div class="input-group">
+            <label for="mentalHealth">Mental Health Notes</label>
+            <textarea id="mentalHealth" class="textarea-field" onchange="generateNotes()"></textarea>
+          </div>
+          <div class="input-group">
+            <label for="additionalNotes">Additional Notes</label>
+            <textarea id="additionalNotes" class="textarea-field" onchange="generateNotes()"></textarea>
+          </div>
+      </div>
+    </form>
+    <!-- Generated Notes Section -->
+    <div class="generated-note-container">
+      <h3>Progress Note</h3>
+      <textarea id="progressNote" class="textarea-field generated-text"></textarea>
+      <button class="btn btn-primary mt-2" onclick="copyText('progressNote')">Copy Progress Note</button>
+    </div>
+    <div class="generated-note-container">
+      <h3>Court Note</h3>
+      <textarea id="courtNote" class="textarea-field generated-text"></textarea>
+      <button class="btn btn-primary mt-2" onclick="copyText('courtNote')">Copy Court Note</button>
+    </div>
+  </div>
+  <script>
+    // --- UTILITY FUNCTIONS ---
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString + 'T00:00:00'); // Avoid timezone issues
+      return new Intl.DateTimeFormat('en-US').format(date);
+    }
 
-    function copyText(elementId) {
-        const textarea = document.getElementById(elementId);
-        textarea.select();
-        // Use the Clipboard API for modern browsers
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(textarea.value).then(() => {
-                const button = event.target;
-                const originalText = button.innerText;
-                button.innerText = 'Copied!';
-                setTimeout(() => { button.innerText = originalText; }, 2000);
-            }).catch(err => {
-                console.error('Could not copy text: ', err);
-                // Fallback for environments where clipboard API fails (like some sandboxed iframes)
-                fallbackCopyText(textarea.value, event.target);
-            });
-        } else {
-            // Fallback for older browsers
-            fallbackCopyText(textarea.value, event.target);
-        }
-    }
+    function copyText(elementId) {
+        const textarea = document.getElementById(elementId);
+        textarea.select();
+        // Use the Clipboard API for modern browsers
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                const button = event.target;
+                const originalText = button.innerText;
+                button.innerText = 'Copied!';
+                setTimeout(() => { button.innerText = originalText; }, 2000);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+                // Fallback for environments where clipboard API fails (like some sandboxed iframes)
+                fallbackCopyText(textarea.value, event.target);
+            });
+        } else {
+            // Fallback for older browsers
+            fallbackCopyText(textarea.value, event.target);
+        }
+    }
 
-    function fallbackCopyText(text, button) {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        
-        // Avoid scrolling to bottom
-        textArea.style.top = "0";
-        textArea.style.left = "0";
-        textArea.style.position = "fixed";
+    function fallbackCopyText(text, button) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        
+        // Avoid scrolling to bottom
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
 
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
 
-        try {
-            const successful = document.execCommand('copy');
-            if (successful) {
-                const originalText = button.innerText;
-                button.innerText = 'Copied!';
-                setTimeout(() => { button.innerText = originalText; }, 2000);
-            }
-        } catch (err) {
-            console.error('Fallback: Oops, unable to copy', err);
-        }
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                const originalText = button.innerText;
+                button.innerText = 'Copied!';
+                setTimeout(() => { button.innerText = originalText; }, 2000);
+            }
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+        }
 
-        document.body.removeChild(textArea);
-    }
+        document.body.removeChild(textArea);
+    }
 
-    function autosizeTextareas() {
-        const textareas = document.querySelectorAll('.generated-text');
-        textareas.forEach(textarea => {
-            textarea.style.height = 'auto'; // Reset height
-            textarea.style.height = (textarea.scrollHeight) + 'px'; // Set to content height
-        });
-    }
+    function autosizeTextareas() {
+        const textareas = document.querySelectorAll('.generated-text');
+        textareas.forEach(textarea => {
+            textarea.style.height = 'auto'; // Reset height
+            textarea.style.height = (textarea.scrollHeight) + 'px'; // Set to content height
+        });
+    }
 
-    // --- UI VISIBILITY HANDLERS ---
-    function handleLudVisibility() {
-      const ludInput = document.getElementById('lud').value;
-      const initialCourtDateInput = document.getElementById('initialCourtDate').value;
-      const ludExtraDiv = document.getElementById('ludExtra');
+    // --- UI VISIBILITY HANDLERS ---
+    function handleLudVisibility() {
+      const ludInput = document.getElementById('lud').value;
+      const initialCourtDateInput = document.getElementById('initialCourtDate').value;
+      const ludExtraDiv = document.getElementById('ludExtra');
 
-      if (!ludInput || !initialCourtDateInput) {
-        ludExtraDiv.classList.add('hidden');
-        return;
-      }
-      const ludDate = new Date(ludInput);
-      const initialCourtDate = new Date(initialCourtDateInput);
-      if (ludDate >= initialCourtDate) {
-        ludExtraDiv.classList.remove('hidden');
-      } else {
-        ludExtraDiv.classList.add('hidden');
-      }
-    }
+      if (!ludInput || !initialCourtDateInput) {
+        ludExtraDiv.classList.add('hidden');
+        return;
+      }
+      const ludDate = new Date(ludInput);
+      const initialCourtDate = new Date(initialCourtDateInput);
+      if (ludDate >= initialCourtDate) {
+        ludExtraDiv.classList.remove('hidden');
+      } else {
+        ludExtraDiv.classList.add('hidden');
+      }
+    }
 
-    function updateMissedStatusVisibility() {
-      const individualAttended = Number(document.getElementById('individualAttended').value) || 0;
-      const individualTotal = Number(document.getElementById('individualTotal').value) || 0;
-      document.getElementById('individualMissedContainer').classList.toggle('hidden', individualAttended >= individualTotal);
+    function updateMissedStatusVisibility() {
+      const individualAttended = Number(document.getElementById('individualAttended').value) || 0;
+      const individualTotal = Number(document.getElementById('individualTotal').value) || 0;
+      document.getElementById('individualMissedContainer').classList.toggle('hidden', individualAttended >= individualTotal);
 
-      const groupAttended = Number(document.getElementById('groupAttended').value) || 0;
-      const groupTotal = Number(document.getElementById('groupTotal').value) || 0;
-      document.getElementById('groupMissedContainer').classList.toggle('hidden', groupAttended >= groupTotal);
+      const groupAttended = Number(document.getElementById('groupAttended').value) || 0;
+      const groupTotal = Number(document.getElementById('groupTotal').value) || 0;
+      document.getElementById('groupMissedContainer').classList.toggle('hidden', groupAttended >= groupTotal);
 
-      const medAttended = Number(document.getElementById('medAttended').value) || 0;
-      const medTotal = Number(document.getElementById('medTotal').value) || 0;
-      document.getElementById('medMissedContainer').classList.toggle('hidden', medAttended >= medTotal);
-    }
+      const medAttended = Number(document.getElementById('medAttended').value) || 0;
+      const medTotal = Number(document.getElementById('medTotal').value) || 0;
+      document.getElementById('medMissedContainer').classList.toggle('hidden', medAttended >= medTotal);
+    }
 
-    function toggleSubstance(selectElem) {
-      const row = selectElem.closest('.dynamic-row');
-      const substanceInput = row.querySelector('.substance-input');
-      substanceInput.style.display = (selectElem.value === "positive") ? "block" : "none";
-      if (selectElem.value !== "positive") {
-        substanceInput.value = "";
-      }
-    }
+    function toggleSubstance(selectElem) {
+      const row = selectElem.closest('.dynamic-row');
+      const substanceInput = row.querySelector('.substance-input');
+      substanceInput.style.display = (selectElem.value === "positive") ? "block" : "none";
+      if (selectElem.value !== "positive") {
+        substanceInput.value = "";
+      }
+    }
 
-    // --- DYNAMIC ROW CREATION ---
-    function addToxRow() {
-      const container = document.getElementById('toxContainer');
-      const row = document.createElement('div');
-      row.className = 'dynamic-row tox-row';
-      row.innerHTML = `
-        <input type="date" class="input-field toxDate" onchange="generateNotes()">
-        <select class="select-field toxResult" onchange="toggleSubstance(this); generateNotes()">
-          <option value="negative">Negative</option>
-          <option value="positive">Positive</option>
-          <option value="pending">Pending</option>
-        </select>
-        <input type="text" class="input-field substance-input toxSubstance" placeholder="Substance(s)" style="display: none;" onchange="generateNotes()">
-        <button type="button" class="btn btn-secondary" onclick="this.parentElement.remove(); generateNotes();">X</button>
-      `;
-      container.appendChild(row);
-    }
+    // --- DYNAMIC ROW CREATION ---
+    function addToxRow() {
+      const container = document.getElementById('toxContainer');
+      const row = document.createElement('div');
+      row.className = 'dynamic-row tox-row';
+      row.innerHTML = `
+        <input type="date" class="input-field toxDate" onchange="generateNotes()">
+        <select class="select-field toxResult" onchange="toggleSubstance(this); generateNotes()">
+          <option value="negative">Negative</option>
+          <option value="positive">Positive</option>
+          <option value="pending">Pending</option>
+        </select>
+        <input type="text" class="input-field substance-input toxSubstance" placeholder="Substance(s)" style="display: none;" onchange="generateNotes()">
+        <button type="button" class="btn btn-secondary" onclick="this.parentElement.remove(); generateNotes();">X</button>
+      `;
+      container.appendChild(row);
+    }
 
-    function addRandomRow() {
-      const container = document.getElementById('randomContainer');
-      const row = document.createElement('div');
-      row.className = 'dynamic-row random-row';
-      row.innerHTML = `
-        <input type="date" class="input-field randomDate" onchange="generateNotes()">
-        <select class="select-field randomResult" onchange="toggleSubstance(this); generateNotes()">
-          <option value="negative">Negative</option>
-          <option value="positive">Positive</option>
-          <option value="missed random">Missed Random</option>
-        </select>
-        <input type="text" class="input-field substance-input randomSubstance" placeholder="Substance(s)" style="display: none;" onchange="generateNotes()">
-        <button type="button" class="btn btn-secondary" onclick="this.parentElement.remove(); generateNotes();">X</button>
-      `;
-      container.appendChild(row);
-    }
+    function addRandomRow() {
+      const container = document.getElementById('randomContainer');
+      const row = document.createElement('div');
+      row.className = 'dynamic-row random-row';
+      row.innerHTML = `
+        <input type="date" class="input-field randomDate" onchange="generateNotes()">
+        <select class="select-field randomResult" onchange="toggleSubstance(this); generateNotes()">
+          <option value="negative">Negative</option>
+          <option value="positive">Positive</option>
+          <option value="missed random">Missed Random</option>
+        </select>
+        <input type="text" class="input-field substance-input randomSubstance" placeholder="Substance(s)" style="display: none;" onchange="generateNotes()">
+        <button type="button" class="btn btn-secondary" onclick="this.parentElement.remove(); generateNotes();">X</button>
+      `;
+      container.appendChild(row);
+    }
 
-    // --- NOTE GENERATION LOGIC ---
-    function generateNotes() {
-      updateMissedStatusVisibility();
+    // --- NOTE GENERATION LOGIC ---
+    function generateNotes() {
+      updateMissedStatusVisibility();
 
-      const getVal = (id) => document.getElementById(id).value;
-      const isChecked = (id) => document.getElementById(id).checked;
+      const getVal = (id) => document.getElementById(id).value;
+      const isChecked = (id) => document.getElementById(id).checked;
 
-      let progressText = '';
-      let courtText = '';
+      let progressText = '';
+      let courtText = '';
 
-      // --- Progress Note Generation ---
-      const lastCourtDate = formatDate(getVal('initialCourtDate'));
-      if (lastCourtDate) {
-        progressText += `Since last court date ${lastCourtDate}, writer provided treatment report via Unified Court System portal UCMS to coordinate care with Drug Treatment Court per request of Michelle Devine.\n\n`;
-      }
-      progressText += "To complete this client's DTC report, writer previously spoke one on one with client and summarized client's treatment schedule and attendance.\n\n";
-      progressText += "In addition, writer checks client's UDS results in both eCR and the The New York State Unified Court System portal UCMS.\n\n";
+      // --- Progress Note Generation ---
+      const lastCourtDate = formatDate(getVal('initialCourtDate'));
+      if (lastCourtDate) {
+        progressText += `Since last court date ${lastCourtDate}, writer provided treatment report via Unified Court System portal UCMS to coordinate care with Drug Treatment Court per request of Michelle Devine.\n\n`;
+      }
+      progressText += "To complete this client's DTC report, writer previously spoke one on one with client and summarized client's treatment schedule and attendance.\n\n";
+      progressText += "In addition, writer checks client's UDS results in both eCR and the The New York State Unified Court System portal UCMS.\n\n";
 
-      const courtPrepDate = formatDate(getVal('courtPrepDate'));
-      if (courtPrepDate) {
-        progressText += `Writer also prepared for court and ways to support and advocate for client in the court room on ${courtPrepDate}. Writer prepared a report for treatment court, which included an update on client’s presentation in services inclusive of client's individual session attendance, group session attendance, weekly check-ins as required by court, random toxicology screens as required by court, and toxicology screens (and results) provided by client to Delphi Rise. \n\n`;
-      }
+      const courtPrepDate = formatDate(getVal('courtPrepDate'));
+      if (courtPrepDate) {
+        progressText += `Writer also prepared for court and ways to support and advocate for client in the court room on ${courtPrepDate}. Writer prepared a report for treatment court, which included an update on client’s presentation in services inclusive of client's individual session attendance, group session attendance, weekly check-ins as required by court, random toxicology screens as required by court, and toxicology screens (and results) provided by client to Delphi Rise. \n\n`;
+      }
 
-      const careCoordination = getVal('careCoordination');
-      if (careCoordination) {
-        progressText += `Writer also coordinated care with ${careCoordination}.\n\n`;
-      }
-      progressText += "SEE Criminal Drug Treatment Court Appearance Report completed and scanned into client's chart.";
+      const careCoordination = getVal('careCoordination');
+      if (careCoordination) {
+        progressText += `Writer also coordinated care with ${careCoordination}.\n\n`;
+      }
+      progressText += "SEE Criminal Drug Treatment Court Appearance Report completed and scanned into client's chart.";
 
-      // --- Court Note Generation ---
-      if (lastCourtDate) {
-        courtText += `Since last court date ${lastCourtDate}:\n\n`;
-      }
+      // --- Court Note Generation ---
+      if (lastCourtDate) {
+        courtText += `Since last court date ${lastCourtDate}:\n\n`;
+      }
 
-      const clientName = getVal('clientName');
-      const hasNotHas = getVal('hasNotHas');
-      courtText += `${clientName || 'Client'} ${hasNotHas} kept all appointments as scheduled.\n`;
+      const clientName = getVal('clientName');
+      const hasNotHas = getVal('hasNotHas');
+      courtText += `${clientName || 'Client'} ${hasNotHas} kept all appointments as scheduled.\n`;
 
-      const checkingIn = getVal('checkingIn');
-      if (checkingIn === 'Yes') {
-        courtText += `Checking in with case manager per requirements: Yes\n\n`;
-      } else {
-        courtText += `NOT checking in with case manager per requirements.\n\n`;
-      }
+      const checkingIn = getVal('checkingIn');
+      if (checkingIn === 'Yes') {
+        courtText += `Checking in with case manager per requirements: Yes\n\n`;
+      } else {
+        courtText += `NOT checking in with case manager per requirements.\n\n`;
+      }
 
-      const lud = formatDate(getVal('lud'));
-      if (lud) {
-        courtText += `LUD: ${lud}`;
-        if (!document.getElementById('ludExtra').classList.contains('hidden')) {
-          const ludResponse = getVal('ludResponse');
-          const ludSubstance = getVal('ludSubstance');
-          if (ludResponse) {
-            courtText += ` (${ludResponse}`;
-            if (ludSubstance) courtText += `, ${ludSubstance}`;
-            courtText += `)`;
-          }
-        }
-        courtText += '\n\n';
-      }
+      const lud = formatDate(getVal('lud'));
+      if (lud) {
+        courtText += `LUD: ${lud}`;
+        if (!document.getElementById('ludExtra').classList.contains('hidden')) {
+          const ludResponse = getVal('ludResponse');
+          const ludSubstance = getVal('ludSubstance');
+          if (ludResponse) {
+            courtText += ` (${ludResponse}`;
+            if (ludSubstance) courtText += `, ${ludSubstance}`;
+            courtText += `)`;
+          }
+        }
+        courtText += '\n\n';
+      }
 
-      const treatmentSchedule = getVal('treatmentSchedule');
-      if (treatmentSchedule) {
-        courtText += `Treatment Schedule: ${treatmentSchedule}\n\n`;
-      }
+      const treatmentSchedule = getVal('treatmentSchedule');
+      if (treatmentSchedule) {
+        courtText += `Treatment Schedule: ${treatmentSchedule}\n\n`;
+      }
 
-      // Attendance Details
-      const individualAttended = getVal('individualAttended');
-      const individualTotal = getVal('individualTotal');
-      if (individualAttended && individualTotal) {
-        courtText += `Attended ${individualAttended}/${individualTotal} individual sessions`;
-        if (Number(individualAttended) < Number(individualTotal) && getVal('individualMissed')) {
-          courtText += ` (${getVal('individualMissed')})`;
-        }
-        courtText += '.\n';
-      }
+      // Attendance Details
+      const individualAttended = getVal('individualAttended');
+      const individualTotal = getVal('individualTotal');
+      if (individualAttended && individualTotal) {
+        courtText += `Attended ${individualAttended}/${individualTotal} individual sessions`;
+        if (Number(individualAttended) < Number(individualTotal) && getVal('individualMissed')) {
+          courtText += ` (${getVal('individualMissed')})`;
+        }
+        courtText += '.\n';
+      }
 
-      const groupAttended = getVal('groupAttended');
-      const groupTotal = getVal('groupTotal');
-      if (groupAttended && groupTotal) {
-        courtText += `Attended ${groupAttended}/${groupTotal} group sessions`;
-        if (Number(groupAttended) < Number(groupTotal) && getVal('groupMissed')) {
-          courtText += ` (${getVal('groupMissed')})`;
-        }
-        courtText += '.\n';
-      }
+      const groupAttended = getVal('groupAttended');
+      const groupTotal = getVal('groupTotal');
+      if (groupAttended && groupTotal) {
+        courtText += `Attended ${groupAttended}/${groupTotal} group sessions`;
+        if (Number(groupAttended) < Number(groupTotal) && getVal('groupMissed')) {
+          courtText += ` (${getVal('groupMissed')})`;
+        }
+        courtText += '.\n';
+      }
 
-      const medAttended = getVal('medAttended');
-      const medTotal = getVal('medTotal');
-      if (medAttended && medTotal) {
-        courtText += `Attended ${medAttended}/${medTotal} medication appointments`;
-        if (Number(medAttended) < Number(medTotal) && getVal('medMissed')) {
-          courtText += ` (${getVal('medMissed')})`;
-        }
-        courtText += '.\n';
-      }
+      const medAttended = getVal('medAttended');
+      const medTotal = getVal('medTotal');
+      if (medAttended && medTotal) {
+        courtText += `Attended ${medAttended}/${medTotal} medication appointments`;
+        if (Number(medAttended) < Number(medTotal) && getVal('medMissed')) {
+          courtText += ` (${getVal('medMissed')})`;
+        }
+        courtText += '.\n';
+      }
 
-      const nextDate = formatDate(getVal('nextDate'));
-      const appointmentType = getVal('appointmentType');
-      if (nextDate && appointmentType) {
-        courtText += `\nNext Appointment: ${nextDate} - ${appointmentType}\n\n`;
-      } else {
-        courtText += '\n';
-      }
+      const nextDate = formatDate(getVal('nextDate'));
+      const appointmentType = getVal('appointmentType');
+      if (nextDate && appointmentType) {
+        courtText += `\nNext Appointment: ${nextDate} - ${appointmentType}\n\n`;
+      } else {
+        courtText += '\n';
+      }
 
-      // Toxicology Screens
-      courtText += `Toxicology Screens at Treatment:\n`;
-      if (isChecked('toxNotScreened')) {
-        courtText += `N/A - not screened since last court date\n\n`;
-      } else {
-        const toxRows = document.querySelectorAll('#toxContainer .tox-row');
-        if (toxRows.length === 0 || !Array.from(toxRows).some(r => r.querySelector('.toxDate').value)) {
-            courtText += 'No screens reported.\n\n';
-        } else {
-            toxRows.forEach(row => {
-                const toxDate = formatDate(row.querySelector('.toxDate').value);
-                if (toxDate) {
-                    const toxResult = row.querySelector('.toxResult').value;
-                    const toxSubstance = row.querySelector('.toxSubstance').value;
-                    courtText += `${toxDate} - ${toxResult}`;
-                    if (toxResult === 'positive' && toxSubstance) {
-                      courtText += ` (${toxSubstance})`;
-                    }
-                    courtText += '\n';
-                }
-            });
-            courtText += '\n';
-        }
-      }
+      // Toxicology Screens
+      courtText += `Toxicology Screens at Treatment:\n`;
+      if (isChecked('toxNotScreened')) {
+        courtText += `N/A - not screened since last court date\n\n`;
+      } else {
+        const toxRows = document.querySelectorAll('#toxContainer .tox-row');
+        if (toxRows.length === 0 || !Array.from(toxRows).some(r => r.querySelector('.toxDate').value)) {
+            courtText += 'No screens reported.\n\n';
+        } else {
+            toxRows.forEach(row => {
+                const toxDate = formatDate(row.querySelector('.toxDate').value);
+                if (toxDate) {
+                    const toxResult = row.querySelector('.toxResult').value;
+                    const toxSubstance = row.querySelector('.toxSubstance').value;
+                    courtText += `${toxDate} - ${toxResult}`;
+                    if (toxResult === 'positive' && toxSubstance) {
+                      courtText += ` (${toxSubstance})`;
+                    }
+                    courtText += '\n';
+                }
+            });
+            courtText += '\n';
+        }
+      }
 
-      // Random Screens
-      courtText += `Random Screens:\n`;
-      if (isChecked('randomNotScreened')) {
-        courtText += `N/A - not screened since last court date\n\n`;
-      } else {
-        const randomRows = document.querySelectorAll('#randomContainer .random-row');
-        if (randomRows.length === 0 || !Array.from(randomRows).some(r => r.querySelector('.randomDate').value)) {
-            courtText += 'No screens reported.\n\n';
-        } else {
-            randomRows.forEach(row => {
-                const randomDate = formatDate(row.querySelector('.randomDate').value);
-                if (randomDate) {
-                    const randomResult = row.querySelector('.randomResult').value;
-                    const randomSubstance = row.querySelector('.randomSubstance').value;
-                    courtText += `${randomDate} - ${randomResult}`;
-                    if (randomResult === 'positive' && randomSubstance) {
-                      courtText += ` (${randomSubstance})`;
-                    }
-                    courtText += '\n';
-                }
-            });
-            courtText += '\n';
-        }
-      }
+      // Random Screens
+      courtText += `Random Screens:\n`;
+      if (isChecked('randomNotScreened')) {
+        courtText += `N/A - not screened since last court date\n\n`;
+      } else {
+        const randomRows = document.querySelectorAll('#randomContainer .random-row');
+        if (randomRows.length === 0 || !Array.from(randomRows).some(r => r.querySelector('.randomDate').value)) {
+            courtText += 'No screens reported.\n\n';
+        } else {
+            randomRows.forEach(row => {
+                const randomDate = formatDate(row.querySelector('.randomDate').value);
+                if (randomDate) {
+                    const randomResult = row.querySelector('.randomResult').value;
+                    const randomSubstance = row.querySelector('.randomSubstance').value;
+                    courtText += `${randomDate} - ${randomResult}`;
+                    if (randomResult === 'positive' && randomSubstance) {
+                      courtText += ` (${randomSubstance})`;
+                    }
+                    courtText += '\n';
+                }
+            });
+            courtText += '\n';
+        }
+      }
 
-      const matAttendance = getVal('matAttendance');
-      if (matAttendance) {
-        courtText += `MAT: Client ${matAttendance} attending MAT appts as scheduled.\n\n`;
-      }
+      const matAttendance = getVal('matAttendance');
+      if (matAttendance) {
+        courtText += `MAT: Client ${matAttendance} attending MAT appts as scheduled.\n\n`;
+      }
 
-      const probation = getVal('probation');
-      if (probation) {
-        courtText += `Probation: ${probation}\n\n`;
-      }
+      const probation = getVal('probation');
+      if (probation) {
+        courtText += `Probation: ${probation}\n\n`;
+      }
 
-      const mentalHealth = getVal('mentalHealth');
-      if (mentalHealth) {
-        courtText += `Mental Health: ${mentalHealth}\n\n`;
-      }
-      
-      const additionalNotes = getVal('additionalNotes');
-      if (additionalNotes) {
-        courtText += `Additional Notes: ${additionalNotes}\n`;
-      }
+      const mentalHealth = getVal('mentalHealth');
+      if (mentalHealth) {
+        courtText += `Mental Health: ${mentalHealth}\n\n`;
+      }
+      
+      const additionalNotes = getVal('additionalNotes');
+      if (additionalNotes) {
+        courtText += `Additional Notes: ${additionalNotes}\n`;
+      }
 
-      document.getElementById('progressNote').value = progressText.trim();
-      document.getElementById('courtNote').value = courtText.trim();
+      document.getElementById('progressNote').value = progressText.trim();
+      document.getElementById('courtNote').value = courtText.trim();
 
-      // Autosize textareas after updating content
-      autosizeTextareas();
-    }
+      // Autosize textareas after updating content
+      autosizeTextareas();
+    }
 
-    // --- INITIALIZATION ---
-    document.addEventListener('DOMContentLoaded', () => {
-        // Add initial rows for better UX
-        addToxRow();
-        addRandomRow();
+    // --- INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Add initial rows for better UX
+        addToxRow();
+        addRandomRow();
 
-        // Initial generation of notes
-        generateNotes();
+        // Initial generation of notes
+        generateNotes();
 
-        // Add event listener to the form for automatic updates
-        document.getElementById('progressNoteForm').addEventListener('input', generateNotes);
+        // Add event listener to the form for automatic updates
+        document.getElementById('progressNoteForm').addEventListener('input', generateNotes);
 
-        // Add listeners for manual typing in generated notes
-        document.getElementById('progressNote').addEventListener('input', autosizeTextareas);
-        document.getElementById('courtNote').addEventListener('input', autosizeTextareas);
-    });
-  </script>
+        // Add listeners for manual typing in generated notes
+        document.getElementById('progressNote').addEventListener('input', autosizeTextareas);
+        document.getElementById('courtNote').addEventListener('input', autosizeTextareas);
+    });
+  </script>
 </body>
 </html>
